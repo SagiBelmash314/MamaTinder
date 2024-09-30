@@ -1,4 +1,7 @@
 from fastapi import APIRouter, FastAPI
+from utils import GeneralSettings, get_general_settings
+
+settings: GeneralSettings = get_general_settings()
 
 app = FastAPI()
 
