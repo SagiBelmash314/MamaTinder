@@ -11,6 +11,7 @@ class MongoSettings(BaseSettings):
     connection_str: str = "mongodb://mongoadmin:mongopassword@192.168.1.134:27017"
     db_name: str = "test"
     user_collection: str = "users"
+    user_exclude_properties: list[str] = ["_id", "age", "user_profile.pictures"]
 
 
 @cache
