@@ -1,4 +1,5 @@
 from pydantic import UUID4, BaseModel
+from schemas import UserProfile
 
 
 class User(BaseModel):
@@ -7,7 +8,7 @@ class User(BaseModel):
     - uuid : UUID4 > User's unique ID
     - username: string > User's username
     - password: string > User's password
-    - user_profile: Profile > User's Profile(class)
+    - user_profile: `UserProfile` > User's Profile(class)
     """
 
     uuid: UUID4
