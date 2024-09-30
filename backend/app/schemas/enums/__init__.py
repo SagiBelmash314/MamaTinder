@@ -1,4 +1,4 @@
-from schemas.enums.relationship_goal import RelationshipGoal
 from schemas.enums.regions import Regions
+from schemas.enums.relationship_goal import RelationshipGoal
 
-__all__ = ['RelationshipGoal', 'Regions']
+__all__ = ["RelationshipGoal", "Regions"]

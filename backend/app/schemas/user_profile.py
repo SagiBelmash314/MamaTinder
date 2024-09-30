@@ -1,6 +1,8 @@
-from pydantic import BaseModel
 from typing import List, Optional
-from enums import RelationshipGoal, Regions
+
+from enums import Regions, RelationshipGoal
+from pydantic import BaseModel
+
 
 class UserProfile(BaseModel):
     """
@@ -13,9 +15,10 @@ class UserProfile(BaseModel):
     - pictures : List[string] > User's profile pictures.
     - preferences: `UserPreferences` > User's profile preferences.
     """
+
     age: int
     height: float
-    location: Optional[Regions] = None 
+    location: Optional[Regions] = None
     relationship_goal: RelationshipGoal
     about_me: Optional[str] = None
     pictures: List[str] = []

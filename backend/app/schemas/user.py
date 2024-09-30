@@ -1,6 +1,7 @@
 from pydantic import UUID4, BaseModel
 from schemas import UserProfile
 
+
 class User(BaseModel):
     """
     Defines the User model class.
