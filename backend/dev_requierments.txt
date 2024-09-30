@@ -1,4 +1,0 @@
-autoflake
-isort
-black
-pylint
