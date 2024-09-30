@@ -1,0 +1,5 @@
+[MASTER]
+disable=missing-module-docstring, too-few-public-methods, logging-fstring-interpolation, import-error
+
+[FORMAT]
+max-line-length=110
