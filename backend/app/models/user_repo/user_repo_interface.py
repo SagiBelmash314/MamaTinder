@@ -9,7 +9,7 @@ class IUserRepo(ABC):
     """interface for the user repo"""
 
     @abstractmethod
-    def get_by_id(self, user_id: UUID4) -> User:
+    async def get_by_id(self, user_id: UUID4) -> User:
         """getting user by id
 
         Raises:
@@ -23,7 +23,7 @@ class IUserRepo(ABC):
         """
 
     @abstractmethod
-    def get_by_username(self, username: str) -> User:
+    async def get_by_username(self, username: str) -> User:
         """
         getting user by username
 
@@ -38,7 +38,7 @@ class IUserRepo(ABC):
         """
 
     @abstractmethod
-    def create(self, user: User) -> User:
+    async def create(self, user: User) -> User:
         """
         creating user shuld override id and not allow multiple users with same username
 
@@ -53,7 +53,7 @@ class IUserRepo(ABC):
         """
 
     @abstractmethod
-    def update(self, user_id: UUID4, prop: str, value: Any) -> User:
+    async def update(self, user_id: UUID4, prop: str, value: Any) -> User:
         """update user to new user data
 
         Args:
@@ -66,7 +66,7 @@ class IUserRepo(ABC):
         """
 
     @abstractmethod
-    def delete(self, user_id: UUID4) -> None:
+    async def delete(self, user_id: UUID4) -> None:
         """delete the user with that id
 
         Args:
@@ -74,7 +74,7 @@ class IUserRepo(ABC):
         """
 
     @abstractmethod
-    def get_by_prefrences(self, amount: int, user: User) -> list[User]:
+    async def get_by_prefrences(self, amount: int, user: User) -> list[User]:
         """
         methode for getting multiple users by prefrences
 
