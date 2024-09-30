@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 *.pyo
 .coverage
+.venv
 
 # FastAPI-specific files
 .fastapi_cache/
