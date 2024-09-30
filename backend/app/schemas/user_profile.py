@@ -2,7 +2,7 @@ from datetime import date
 from typing import List, Optional
 
 from enums import Regions, RelationshipGoal
-from pydantic import BaseModel, computed_field
+from pydantic import BaseModel, computed_field, UUID4
 from schemas import UserPreferences
 
 
@@ -25,6 +25,8 @@ class UserProfile(BaseModel):
     about_me: Optional[str] = None
     pictures: List[str] = []
     preference: UserPreferences
+    liked_users: List[UUID4] = []
+    matched_users: List[UUID4] = []
 
     @computed_field
     @property
