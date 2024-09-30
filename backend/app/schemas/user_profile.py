@@ -2,7 +2,7 @@ from datetime import date
 from typing import List, Optional
 
 from enums import Regions, RelationshipGoal
-from pydantic import BaseModel, computed_field, UUID4
+from pydantic import UUID4, BaseModel, computed_field
 from schemas import UserPreferences
 
 
@@ -13,16 +13,18 @@ class UserProfile(BaseModel):
     - height : float > User's profile height.
     - location : (optional) `Regions` > User's profile region location.
     - relationship_goal : `RelationshipGoal` > User's profile relationship goal.
-    - about_me : (optional) string > User's profile "about me".
-    - pictures : List[string] > User's profile pictures.
+    - about_me : string > User's profile "about me".
+    - pictures : `List[string]` > User's profile pictures.
     - preferences: `UserPreferences` > User's profile preferences.
+    - liked_users : `List[UUID4]` > User's liked users.
+    - matched_users: `List[UUID4]` > User's matched users.
     """
 
     birthdate: date
     height: float
     location: Optional[Regions] = None
     relationship_goal: RelationshipGoal
-    about_me: Optional[str] = None
+    about_me: str = ""
     pictures: List[str] = []
     preference: UserPreferences
     liked_users: List[UUID4] = []
