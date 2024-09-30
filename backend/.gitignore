@@ -1,0 +1,29 @@
+# Python-specific files
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+.coverage
+
+# FastAPI-specific files
+.fastapi_cache/
+
+# PyMongo-specific files
+.mongocfg/
+.mongodb/
+
+# Pydantic-specific files
+pydantic.json
+
+# IDE-specific files
+*.vscode/
+*.idea/
+*.sublime-project
+
+# Temporary files
+*.swp
+*.bak
+*~
+
+# System files
+.DS_Store
