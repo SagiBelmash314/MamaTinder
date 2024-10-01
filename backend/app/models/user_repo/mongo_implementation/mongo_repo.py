@@ -6,6 +6,8 @@ from motor.motor_asyncio import AsyncIOMotorCollection
 from pydantic import UUID4
 from schemas.user import User
 from utils import MongoSettings, get_mongo_settings
+from pymongo.results import DeleteResult
+
 
 settings: MongoSettings = get_mongo_settings()
 
@@ -34,33 +36,64 @@ class MongoUserRepo(IUserRepo, BaseMongoRepo):
         )
         return User(**res)
 
-    async def _check_property_existes(self,prop_name:str, value: Any) -> bool:
-        old_user: dict = await self._perform_db_action(
-            lambda: self._collection.find_one({prop_name: value}),
+    async def _count_property_docs(self,prop_name:str, value: Any) -> int:
+        """
+        counts the amount of documents with the same value for the prop
+
+        Raises:
+            DBOperationError: couldent perform the db action
+
+        Args:
+            prop_name (str): the property name
+            value (Any): value the object has in the prop
+
+        Returns:
+            int: amount of documents with the same value for the prop
+        """
+        old_user_count: int = await self._perform_db_action(
+            lambda: self._collection.count_documents({prop_name: value}),
             "failed to check for existing user",
         )
-        if old_user:
-            raise ValueError("user already existes")
+        return old_user_count
+            
     
     async def create(self, new_user: User) -> User:
         async with await self._mongo_client.start_session() as session:
             async with session.start_transaction():
-                old_user: dict = await self._perform_db_action(
-                    lambda: self._collection.find_one({"username": new_user.username}),
-                    "failed to check for existing user",
-                )
-                if old_user:
+                if self._count_property_docs("username", new_user.username):
                     raise ValueError("user already existes")
-                await self._perform_db_action(
-                    lambda: self._collection.insert_one(new_user.model_dump(exclude={"id"})),
+                created_user:dict[str,Any] = await self._perform_db_action(
+                    lambda: self._collection.insert_one(new_user.model_dump(), return_document=True),
                     "failed to create object",
                 )
+        return User(**created_user)
+
 
     async def update(self, user_id: UUID4, prop: str, value: Any) -> User:
-        pass
+        async with await self._mongo_client.start_session() as session:
+            async with session.start_transaction():
+                if prop == "username":
+                    if self._count_property_docs("username", value) > 1:
+                        raise ValueError("user already existes")
+                updated_doc = await self._perform_db_action(
+                    lambda: self._collection.find_one_and_update(
+                        {"uuid": user_id},
+                        {"$set": {prop: value}},
+                        return_document=True
+                    ),
+                    "Failed to update user"
+                )
+        if not updated_doc:
+            raise ValueError(f"User with id {user_id} not found or update failed.")
+        return User(**updated_doc)
 
-    async def delete(self, user_id: UUID4) -> None:
-        pass
+    async def delete_by_id(self, user_id: UUID4) -> bool:
+        deleted_count: DeleteResult = await self._perform_db_action(
+            lambda: self._collection.delete_one({"uuid": user_id}), "failed to delete object"
+        )
+        if deleted_count.deleted_count == 0:
+            raise ValueError("user not found")
+        return True
 
     async def get_by_prefrences(self, amount: int, user: User) -> list[User]:
         pass

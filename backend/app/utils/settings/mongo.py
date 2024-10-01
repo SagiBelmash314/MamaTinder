@@ -14,6 +14,8 @@ class MongoSettings(BaseSettings):
     user_exclude_properties: list[str] = ["_id", "age", "user_profile.pictures"]
 
 
+
+
 @cache
 def get_mongo_settings() -> MongoSettings:
     """

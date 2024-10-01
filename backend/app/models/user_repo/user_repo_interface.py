@@ -74,7 +74,7 @@ class IUserRepo(ABC):
         """
 
     @abstractmethod
-    async def delete(self, user_id: UUID4) -> None:
+    async def delete_by_id(self, user_id: UUID4) -> bool:
         """
         delete the user with that id
 
@@ -83,6 +83,9 @@ class IUserRepo(ABC):
 
         Args:
             user_id (UUID4): id of the user to delete
+
+        Returns:
+            bool: true if deleted
         """
 
     @abstractmethod
