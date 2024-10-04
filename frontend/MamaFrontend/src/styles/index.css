@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  textarea {
+    @apply mb-5 rounded resize-none shadow-[0_10px_30px_rgba(0,0,0,0.3)] border-gray-600 border-2 text-center h-12 p-2
+  }
+}
