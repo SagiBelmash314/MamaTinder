@@ -57,4 +57,5 @@ class MongoClientManager:
 
 @cache
 def get_client(connection_string: str) -> MongoClientManager:
+    """gets the client with cache for singlton"""
     return MongoClientManager(connection_string)

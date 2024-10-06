@@ -25,6 +25,21 @@ class IUserRepo(ABC):
         """
 
     @abstractmethod
+    async def get_by_id_list(self, user_ids: list[UUID4]) -> list[User]:
+        """
+        getting users by id list
+
+        Raises:
+            DBOperationError: cannot complete the action
+
+        Args:
+            user_ids (list[UUID4]): list of user ids
+
+        Returns:
+            list[User]: users with wanted id
+        """
+
+    @abstractmethod
     async def get_by_username(self, username: str) -> User:
         """
         getting user by username
