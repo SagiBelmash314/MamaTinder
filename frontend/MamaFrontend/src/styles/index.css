@@ -2,8 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  textarea {
-    @apply mb-5 rounded resize-none shadow-[0_10px_30px_rgba(0,0,0,0.3)] border-gray-600 border-2 text-center h-12 p-2
-  }
+@font-face {
+  font-family: 'Narkis';
+  font-weight: normal;
+  src: url('../assets/fonts/NarkissBlock-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Narkis';
+  font-weight: bold;
+  src: url('../assets/fonts/NarkissBlock-Bold.woff2') format('woff2');
+}
+
+h1 {
+  font-family: 'Narkis';
+  font-weight: normal;
+}
+
+h1.bold {
+  font-weight: bold;
 }

@@ -23,6 +23,13 @@ const UploadPhotoBtn = ({ className }: Props) => {
         role={undefined}
         variant="contained"
         tabIndex={-1}
+        sx={{
+          borderRadius: 0,
+          boxShadow: "none",
+          "&:hover": {
+            boxShadow: "none", // Remove shadow on hover
+          },
+        }}
         style={{ height: "100%", width: "100%" }}
       >
         Upload files

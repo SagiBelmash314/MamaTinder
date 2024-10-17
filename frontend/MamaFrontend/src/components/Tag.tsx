@@ -34,9 +34,9 @@ const Tag = ({ children, isExpanded }: Props) => {
     setH(400);
     setOpacity(0);
     const firstTimeoutId = setTimeout(() => {
-      setW(800);
+      setW(634);
       const secondTimeoutId = setTimeout(() => {
-        setClassName("bg-purple-500");
+        setClassName("bg-blue-200");
         setOpacity(1);
         clearTimeout(secondTimeoutId);
       }, 500);
@@ -60,7 +60,7 @@ const Tag = ({ children, isExpanded }: Props) => {
           width: `${w}px`,
           height: `${h}px`,
           opacity: `${opacity}`,
-          transition: "width 0.5s ease, height 0.5s ease, opacity 0.2s ease",
+          transition: "width 0.5s ease, height 0.5s ease, opacity 0.4s ease",
         }}
       >
         {children}
